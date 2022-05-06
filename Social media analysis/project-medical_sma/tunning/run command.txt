@@ -1,0 +1,3 @@
+python run_mlm.py --model_name_or_path allegro/herbert-base-cased --train_file znanylekarz_dataset_all_clean.txt --do_train --output_dir C:\Users\Wilk96\project-medical_sma\tunning\model  --line_by_line
+
+python run_mlm.py --model_name_or_path allegro/herbert-base-cased --train_file set.txt --do_train --output_dir C:\Users\Wilk96\project-medical_sma\tunning\model  --line_by_line

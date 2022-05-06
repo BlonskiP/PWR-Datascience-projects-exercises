@@ -1,0 +1,6 @@
+celery==4.3.0
+pandas
+pymongo
+requests
+pytorch-forecasting
+torch

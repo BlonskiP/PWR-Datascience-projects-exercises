@@ -1,0 +1,17 @@
+Loss,Accuracy,Fscore,layers,weights,biases,units
+2.4494199752807617,0.24409979770734996,0.20112729538270582,1,"('random_uniform_initializer',)","('random_uniform_initializer',)",256
+2.447052478790283,0.26904922454484154,0.23342279741779623,2,"('random_uniform_initializer',)","('random_uniform_initializer',)",256
+2.475966215133667,0.24881995954147,0.19445411784044705,5,"('random_uniform_initializer',)","('random_uniform_initializer',)",256
+2.476033926010132,0.17835468644639244,0.03811387183689342,10,"('random_uniform_initializer',)","('random_uniform_initializer',)",256
+2.449885368347168,0.222521915037087,0.209361946508106,1,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.4410793781280518,0.24881995954147,0.24488877605407924,2,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.504672050476074,0.25657451112609575,0.22473954866625237,5,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.4185945987701416,0.23735670937289277,0.13864988190077215,10,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.3853647708892822,0.2265677680377613,0.15291613436990995,1,"('random_normal_initializer',)","('random_normal_initializer',)",256
+2.4939403533935547,0.2589345920431558,0.2473414826699052,2,"('random_normal_initializer',)","('random_normal_initializer',)",256
+2.4958696365356445,0.23600809170600134,0.19277651654010705,5,"('random_normal_initializer',)","('random_normal_initializer',)",256
+2.4429244995117188,0.21207012811867834,0.09634158212531571,10,"('random_normal_initializer',)","('random_normal_initializer',)",256
+2.4768548011779785,0.21207012811867834,0.17257620949469943,1,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.4271981716156006,0.25252865812542147,0.23706352779348497,2,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.4428908824920654,0.24106540795684422,0.19564296764442063,5,"('random_normal_initializer',)","('random_uniform_initializer',)",256
+2.4651479721069336,0.21476736345246122,0.10901596322172868,10,"('random_normal_initializer',)","('random_uniform_initializer',)",256

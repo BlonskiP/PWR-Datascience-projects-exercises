@@ -1,0 +1,115 @@
+version: '3.4'
+services:
+  scraper_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: &img worker
+    command: [celery, --app=workers.scraper.app, worker, -Q, scraper]
+    env_file: &envfile .env
+    environment: &env
+      - MONGO_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@db:27017
+      - CELERY_BROKER_URL=amqp://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - CELERY_RESULT_BACKEND=rpc
+      - prometheus_multiproc_dir=/metrics
+      - ML_EMBEDDING_MODEL_PATH=allegro/herbert-base-cased
+      - ML_CLF_MODEL_PATH=/ml/model
+      - KEYWORDS_FILE=/input/global-keywords.txt
+    depends_on: &deps
+      - rabbitmq
+      - metrics
+      - db
+    volumes: &vols
+      - ./src:/app
+      - ./data/metrics:/metrics
+      - ./data/input:/input
+      - ./data/ml:/ml
+  ml_worker:
+    image: *img
+    command: [celery, --app=workers.ml.app, worker, -Q, ml]
+    env_file: *envfile
+    environment: *env
+    volumes: *vols
+    depends_on: *deps
+  db_worker:
+    image: *img
+    command: [celery, --app=workers.db.app, worker, -Q, db]
+    env_file: *envfile
+    environment: *env
+    depends_on: *deps
+    volumes: *vols
+#  db_daemon:
+#    image: *img
+#    command: [python, db_observer_daemon.py]
+#    env_file: *envfile
+#    environment: *env
+#    depends_on: *deps
+#    volumes: *vols
+  pipeline:
+    image: *img
+    command: [python, pipeline.py]
+    env_file: *envfile
+    environment: *env
+    depends_on: *deps
+    volumes: *vols
+  metrics:
+    image: *img
+    command: [gunicorn, -w, "4", "metric_server:app"]
+    environment:
+      - prometheus_multiproc_dir=/metrics
+    volumes: *vols
+  rabbitmq:
+    image: rabbitmq:3.8
+    env_file: *envfile
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana:7.3.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data/dashboard:/var/lib/grafana
+  db:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - "27017:27017"
+    env_file: *envfile
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - ./data/db:/data/db
+#  init_db:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile-init-mongo
+#    image: init-mongo
+#    env_file: *envfile
+#    environment:
+#      - MONGO_USERNAME=${MONGO_USERNAME}
+#      - MONGO_PASSWORD=${MONGO_PASSWORD}
+#      - MONGO_URL=mongo://db:27017
+#    depends_on:
+#      - db
+  dbadmin:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    env_file: .env
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGO_WEB_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGO_WEB_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=db
+    depends_on:
+      - db

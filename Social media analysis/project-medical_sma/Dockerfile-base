@@ -1,0 +1,14 @@
+# Base docker image for model package
+
+FROM python:3.6-buster
+
+WORKDIR /
+
+# model deps
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copy model package
+COPY ./model /lib/model
+
+ENV PYTHONPATH "${PYTHONPATH}:/lib"

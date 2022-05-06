@@ -1,0 +1,5 @@
+,Set,precision,recall,fscore
+0,IrisK:0 Folds:5farest_distance_weighted_vote manhatan,0.8619806119806122,0.8533333333333334,0.8512945154485068
+0,GlassK:0 Folds:5farest_distance_weighted_vote manhatan,0.48507278540173276,0.36255952380952383,0.3427015525861826
+0,WineK:0 Folds:5farest_distance_weighted_vote manhatan,0.3071860367386751,0.24067397457654313,0.2366217653814764
+0,seeds K:0 Folds:5farest_distance_weighted_vote manhatan,0.8420994038641098,0.8333333333333334,0.8344912215731645

@@ -1,0 +1,84 @@
+version: '3.4'
+services:
+  metrics:
+    build: .
+    command: [gunicorn, -w, "4", "metric_server:app"]
+    environment:
+      - prometheus_multiproc_dir=/metrics
+    volumes: &vols
+      - ./src:/app
+      - ./metrics:/metrics
+      - ./input:/input
+  scraper_worker:
+    build: .
+    image: &img worker
+    command: [celery, --app=workers.scraper.app, worker, -Q, scraper]
+    env_file: .env
+    environment: &env
+      - MONGO_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@db:27017
+      - CELERY_BROKER_URL=amqp://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - CELERY_RESULT_BACKEND=rpc
+      - prometheus_multiproc_dir=/metrics
+      - KEYWORDS_FILE=${KEYWORDS_FILE}
+      - CATEGORIES_FILE=${CATEGORIES_FILE}
+      - SCRAPE_MODE=${SCRAPE_MODE}
+    depends_on: &deps
+      - rabbitmq
+      - metrics
+      - db
+    volumes: *vols
+  db_worker:
+    image: *img
+    command: [celery, --app=workers.db.app, worker, -Q, db]
+    env_file: .env
+    environment: *env
+    depends_on: *deps
+    volumes: *vols
+  pipeline:
+    image: *img
+    command: [python, pipeline.py]
+    env_file: .env
+    environment: *env
+    depends_on: *deps
+    volumes: *vols
+  rabbitmq:
+    image: rabbitmq:3.8
+    env_file: .env
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana:7.3.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboard:/var/lib/grafana
+  db:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - "27017:27017"
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    volumes:
+      - ./database:/data/db
+  dbadmin:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    env_file: .env
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGO_WEB_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGO_WEB_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=db

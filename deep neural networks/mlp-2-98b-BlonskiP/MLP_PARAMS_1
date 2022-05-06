@@ -1,0 +1,19 @@
+Loss,Accuracy,Fscore,layers,weights,biases,units
+2.403437376022339,0.23600809170600134,0.1813263486362651,1,uni,uni,256
+2.365283489227295,0.2437626432906271,0.1887401481060404,1,uni,uni,256
+2.382418632507324,0.24747134187457856,0.2062643510081956,1,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.5215277671813965,0.22859069453809844,0.22645518269479906,2,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.391369342803955,0.24106540795684422,0.17330846854654022,5,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.491276979446411,0.17768037761294672,0.05929500805755735,10,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.3805134296417236,0.2289278489548213,0.13725538437877807,1,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.507035970687866,0.23937963587322994,0.23177534805745784,2,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.4614310264587402,0.23465947403910992,0.21672836074717175,5,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.438349485397339,0.21274443695212408,0.11252349431409517,10,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.395989179611206,0.24477410654079568,0.1835792047678229,1,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,256
+2.483179807662964,0.24106540795684422,0.21850283875874096,2,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,256
+2.4693427085876465,0.24814565070802427,0.21952655007171726,5,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,256
+2.402813673019409,0.22420768712070127,0.10970896271455298,10,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,256
+2.3896877765655518,0.24511126095751853,0.20072156486316664,1,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.5191023349761963,0.24612272420768713,0.21012375222674254,2,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.616273880004883,0.2606203641267701,0.21541105242124586,5,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256
+2.4563257694244385,0.2174645987862441,0.1069963663107936,10,<class 'tensorflow.python.ops.init_ops_v2.RandomNormal'>,<class 'tensorflow.python.ops.init_ops_v2.RandomUniform'>,256

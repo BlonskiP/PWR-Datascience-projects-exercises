@@ -1,0 +1,5 @@
+,Set,precision,recall,fscore
+0,IrisK:3 Folds:3farest_distance_weighted_vote euclidean,0.9439153439153439,0.939950980392157,0.9400285077704432
+0,GlassK:3 Folds:3farest_distance_weighted_vote euclidean,0.6486136760124765,0.5393715677773651,0.5581233488841211
+0,WineK:3 Folds:3farest_distance_weighted_vote euclidean,0.3808790135386024,0.25753275487781374,0.25544091267846203
+0,seeds K:3 Folds:3farest_distance_weighted_vote euclidean,0.9079454049260812,0.9001610305958133,0.8996001822225429

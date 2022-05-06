@@ -1,0 +1,6 @@
+sklearn-hierarchical-classification
+pandas
+numpy
+networkx
+lazy
+pygraphviz

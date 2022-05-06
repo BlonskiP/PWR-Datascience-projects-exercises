@@ -1,0 +1,4 @@
+EDDARD STARK.BRANDON STARK.{'relation':'Ojciec', 'color':'grey'}
+BRANDON STARK.EDDARD STARK.{'relation':'Syn', 'color':'grey'}
+ARYA STARK.EDDARD STARK.{'relation':'Córka', 'color':'grey'}
+EDDARD STARK.CATLYN TULLY.{'relation':'Żona', 'color':'grey'}
